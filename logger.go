@@ -9,11 +9,11 @@ type logger struct {
 	LOG_DESTENATION string
 }
 
-func (l *logger) SetLoggerFile(path string) {
-	l.LOG_DESTENATION = path
+func (L *logger) SetLoggerFile(path string) {
+	L.LOG_DESTENATION = path
 }
 
-func (l *logger) Add(level string, message string, err error) {
+func (L *logger) Add(level string, message string, err error) {
 	var error_message string
 	if err != nil {
 		error_message = err.Error()
@@ -22,7 +22,7 @@ func (l *logger) Add(level string, message string, err error) {
 		error_message = ""
 		fmt.Println(level + " | " + message)
 	}
-	f, err := os.Open(l.LOG_DESTENATION)
+	f, err := os.Open(L.LOG_DESTENATION)
 	defer func(f *os.File) {
 		err := f.Close()
 		if err != nil {
