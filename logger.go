@@ -5,9 +5,15 @@ import (
 	"os"
 )
 
-var LOG_DESTENATION string = ""
+type Logger struct {
+	LOG_DESTENATION string
+}
 
-func Add(level string, message string, err error) {
+func (l *Logger) SetLoggerFile(path string) {
+	l.LOG_DESTENATION = path
+}
+
+func (l *Logger) Add(level string, message string, err error) {
 	var error_message string
 	if err != nil {
 		error_message = err.Error()
@@ -16,7 +22,7 @@ func Add(level string, message string, err error) {
 		error_message = ""
 		fmt.Println(level + " | " + message)
 	}
-	f, err := os.Open(LOG_DESTENATION)
+	f, err := os.Open(l.LOG_DESTENATION)
 	defer func(f *os.File) {
 		err := f.Close()
 		if err != nil {
