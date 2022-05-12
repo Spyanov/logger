@@ -22,11 +22,11 @@ func (L *LoggerType) Add(level string, message string, err error) {
 		error_message = ""
 		fmt.Println(level + " | " + message)
 	}
-	f, err := os.Open(L.LOG_DESTENATION)
+	f, err := os.OpenFile(L.LOG_DESTENATION, os.O_APPEND|os.O_WRONLY, 0600)
 	defer func(f *os.File) {
 		err := f.Close()
 		if err != nil {
-
+			fmt.Println("Ошибка открытия файла: ", err)
 		}
 	}(f)
 
