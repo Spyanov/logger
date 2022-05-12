@@ -29,6 +29,7 @@ func (L *logger) Add(level string, message string, err error) {
 
 		}
 	}(f)
+
 	if err != nil {
 		fmt.Println("Ошибка открытия файла лога")
 	}
