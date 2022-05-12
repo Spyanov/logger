@@ -5,15 +5,15 @@ import (
 	"os"
 )
 
-type Logger struct {
+type LoggerType struct {
 	LOG_DESTENATION string
 }
 
-func (L *Logger) SetLoggerFile(path string) {
+func (L *LoggerType) SetLoggerFile(path string) {
 	L.LOG_DESTENATION = path
 }
 
-func (L *Logger) Add(level string, message string, err error) {
+func (L *LoggerType) Add(level string, message string, err error) {
 	var error_message string
 	if err != nil {
 		error_message = err.Error()
