@@ -33,7 +33,7 @@ func (L *LoggerType) Add(level string, message string, err error) {
 	if err != nil {
 		fmt.Println("Ошибка открытия файла лога")
 	}
-	_, err = f.WriteString(level + " | " + message + " : " + error_message)
+	_, err = f.WriteString(level + " | " + message + " : " + error_message + "\n")
 	if err != nil {
 		fmt.Println("Ошибка записи лога")
 	}
