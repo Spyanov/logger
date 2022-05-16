@@ -13,14 +13,14 @@ func (L *LoggerType) SetLoggerFile(path string) {
 	L.LOG_DESTENATION = path
 }
 
-func (L *LoggerType) Add(level string, message string, err error) {
-	var error_message string
-	if err != nil {
-		error_message = err.Error()
-		fmt.Println(level+" | "+message+" : ", error_message)
+func (L *LoggerType) Add(level string, message string, errorMessage error) {
+	var logLine string
+	if errorMessage != nil {
+		logLine = "ERROR | " + message + " : " + errorMessage.Error()
+		fmt.Println(logLine)
 	} else {
-		error_message = ""
-		fmt.Println(level + " | " + message)
+		logLine = level + " | " + message
+		fmt.Println(logLine)
 	}
 	f, err := os.OpenFile(L.LOG_DESTENATION, os.O_APPEND|os.O_WRONLY, 0600)
 	defer func(f *os.File) {
@@ -33,7 +33,8 @@ func (L *LoggerType) Add(level string, message string, err error) {
 	if err != nil {
 		fmt.Println("Ошибка открытия файла лога")
 	}
-	_, err = f.WriteString(level + " | " + message + " : " + error_message + "\n")
+
+	_, err = f.WriteString(logLine + "\n")
 	if err != nil {
 		fmt.Println("Ошибка записи лога")
 	}
