@@ -14,6 +14,9 @@ func (L *LoggerType) SetLoggerFile(path string) {
 }
 
 func (L *LoggerType) Add(level string, message string, errorMessage error) {
+	if level == "" {
+		level = "INFO"
+	}
 	var logLine string
 	if errorMessage != nil {
 		logLine = "ERROR | " + message + " : " + errorMessage.Error()
