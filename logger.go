@@ -25,7 +25,7 @@ func (L *LoggerType) Add(level string, message string, errorMessage error) {
 		logLine = level + " | " + message
 		fmt.Println(logLine)
 	}
-	f, err := os.OpenFile(L.LOG_DESTENATION, os.O_APPEND|os.O_WRONLY, 0600)
+	f, err := os.OpenFile(L.LOG_DESTENATION, os.O_CREATE|os.O_APPEND, 0600)
 	defer func(f *os.File) {
 		err := f.Close()
 		if err != nil {
